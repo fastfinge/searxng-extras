@@ -13,7 +13,7 @@ custom SearXNG image.
 
 | file | id | what it does |
 | --- | --- | --- |
-| `hindsight.py` | `hindsight` | Semantic recall against a [Hindsight](https://nousresearch.com) memory bank, rendered in the Answers box above the results |
+| `hindsight.py` | `hindsight` | Semantic recall against a [Hindsight](https://hindsight.vectorize.io/) memory bank, rendered in the Answers box above the results |
 | `iceshrimp.py` | `iceshrimp` | `/api/v2/search` on an Iceshrimp (or Mastodon-compatible) instance, as result cards |
 | `lemmy.py` | `lemmy` | `/api/v3/search` on a Lemmy instance, as result cards |
 | `sx_prefetch.py` | — | Shared helper: start the remote call in `pre_search`, collect it in `post_search` |
