@@ -1,0 +1,108 @@
+# Example SearXNG configuration for the plugins/engines in this repo.
+# Copy the parts you need into your searxng settings.yml and fill in the blanks.
+#
+# NOTE: a `plugins:` block REPLACES the upstream defaults instead of merging,
+# so every built-in you want must be listed here. Re-check the list after a
+# SearXNG upgrade (docs.searxng.org/admin/settings/settings_plugins.html).
+
+plugins:
+  searx.plugins.calculator.SXNGPlugin: {active: true}
+  searx.plugins.hash_plugin.SXNGPlugin: {active: true}
+  searx.plugins.self_info.SXNGPlugin: {active: true}
+  searx.plugins.unit_converter.SXNGPlugin: {active: true}
+  searx.plugins.hostnames.SXNGPlugin: {active: true}
+  searx.plugins.time_zone.SXNGPlugin: {active: true}
+  searx.plugins.ahmia_filter.SXNGPlugin: {active: true}
+  searx.plugins.tracker_url_remover.SXNGPlugin: {active: true}
+  searx.plugins.infinite_scroll.SXNGPlugin: {active: false}
+  searx.plugins.oa_doi_rewrite.SXNGPlugin: {active: false}
+  searx.plugins.tor_check.SXNGPlugin: {active: false}
+
+  # --- plugins from this repo ---
+  hindsight.HindsightMemory: {active: true}
+  iceshrimp.IceshrimpSearch: {active: true}
+  lemmy.LemmySearch: {active: true}
+
+# Top-level blocks: one per plugin id. Secrets stay in the environment, never
+# here.
+hindsight:
+  url: http://127.0.0.1:9177
+  bank: hermes
+  budget: low
+  max_tokens: 800
+  max_results: 5
+  types: []            # or ["observation"] for ~1.5 s faster, notes-only
+  timeout: 8.0
+  join_timeout: 5.0    # must exceed real recall latency
+  min_semantic: 0.62
+  cache_ttl: 900
+  cache_size: 256
+
+iceshrimp:
+  base_url: https://social.example.com
+  limit: 5
+  timeout: 6.0
+  join_timeout: 1.5
+  cache_ttl: 300
+  cache_size: 128
+
+lemmy:
+  base_url: https://lemmy.example.com
+  limit: 5
+  sort: TopAll
+  timeout: 6.0
+  join_timeout: 1.5
+  cache_ttl: 300
+  cache_size: 128
+
+# Engines from this repo. Engine secrets are read from the engine entry, so the
+# keys belong here (this file is an example — keep the real one out of git).
+engines:
+  - name: serper
+    engine: serper_api
+    shortcut: sp
+    categories: [general]
+    api_key: "YOUR_SERPER_KEY"
+    results_per_page: 20
+    disabled: false
+
+  - name: tavily
+    engine: tavily_api
+    shortcut: tv
+    categories: [general]
+    api_key: "YOUR_TAVILY_KEY"
+    results_per_page: 20
+    disabled: false
+
+  - name: linkup
+    engine: linkup_api
+    shortcut: lu
+    categories: [general]
+    api_key: "YOUR_LINKUP_KEY"
+    results_per_page: 20
+    disabled: false
+
+  - name: querit
+    engine: querit_api
+    shortcut: qt
+    categories: [general]
+    api_key: "YOUR_QUERIT_KEY"
+    results_per_page: 20
+    disabled: false
+
+  - name: you
+    engine: you_api
+    shortcut: you
+    categories: [general]
+    api_key: "YOUR_YOU_KEY"
+    results_per_page: 10
+    disabled: false
+
+  - name: history
+    engine: nogon_api
+    shortcut: hist
+    categories: [general]
+    search_url: http://127.0.0.1:4433/search
+    access_token: "YOUR_NOGON_TOKEN"
+    results_per_page: 20
+    disabled: false
